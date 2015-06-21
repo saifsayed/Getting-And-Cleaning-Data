@@ -5,21 +5,22 @@
 #4.Appropriately labels the data set with descriptive variable names. 
 #5.From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
-#Requirement 1
+
+#setwd("C:/Users/saif/Videos/Study/John Hopkins-Data Science/Course 3-Getting and Cleaning Data")
 #Read Test Data
-Test_Data_Subject <-read.table("C:/Users/saif/Videos/Study/John Hopkins-Data Science/Course 3-Getting and Cleaning Data/UCI HAR Dataset/test/subject_test.txt")
-Test_Data_Features<-read.table("C:/Users/saif/Videos/Study/John Hopkins-Data Science/Course 3-Getting and Cleaning Data/UCI HAR Dataset/test/X_test.txt")
-Test_Data_Activity<-read.table("C:/Users/saif/Videos/Study/John Hopkins-Data Science/Course 3-Getting and Cleaning Data/UCI HAR Dataset/test/Y_test.txt")
+Test_Data_Subject <-read.table("./UCI HAR Dataset/test/subject_test.txt")
+Test_Data_Features<-read.table("./UCI HAR Dataset/test/X_test.txt")
+Test_Data_Activity<-read.table("./UCI HAR Dataset/test/Y_test.txt")
 Test_Data         <-cbind(Test_Data_Subject,Test_Data_Activity,Test_Data_Features)
 #Read Training Data
-Train_Data_Subject <-read.table("C:/Users/saif/Videos/Study/John Hopkins-Data Science/Course 3-Getting and Cleaning Data/UCI HAR Dataset/train/subject_train.txt")
-Train_Data_Features<-read.table("C:/Users/saif/Videos/Study/John Hopkins-Data Science/Course 3-Getting and Cleaning Data/UCI HAR Dataset/train/X_train.txt")
-Train_Data_Activity<-read.table("C:/Users/saif/Videos/Study/John Hopkins-Data Science/Course 3-Getting and Cleaning Data/UCI HAR Dataset/train/Y_train.txt")
+Train_Data_Subject <-read.table("./UCI HAR Dataset/train/subject_train.txt")
+Train_Data_Features<-read.table("./UCI HAR Dataset/train/X_train.txt")
+Train_Data_Activity<-read.table("./UCI HAR Dataset/train/Y_train.txt")
 Train_Data         <-cbind(Train_Data_Subject,Train_Data_Activity,Train_Data_Features)
 #Combining Test and Tain Data
 Data               <-rbind(Test_Data,Train_Data)
 #Reading the Feature names table
-Features_Names    <-read.table("C:/Users/saif/Videos/Study/John Hopkins-Data Science/Course 3-Getting and Cleaning Data/UCI HAR Dataset/features.txt")
+Features_Names    <-read.table("./UCI HAR Dataset/features.txt")
 
 #filtering mean and std value col names
 names_mean  <-grep("mean()",Features_Names[,2],value=TRUE,fixed=TRUE)
@@ -39,7 +40,6 @@ colnames(Data) <- cols
 Data_sub<-Data[,cols_sub]
 
 #Order the data, first subject then activity
-#Data_sub<-Data_sub[order(Data_sub$Subject,Data_sub$Activity),]
 Data$Subject<-as.factor(Data$Subject)
 Data$Activity<-as.factor(Data$Activity)
 library(dplyr)
@@ -110,4 +110,6 @@ meanfBodyAccMagstd=mean(fBodyAccMagstd),
 meanfBodyBodyAccJerkMagstd=mean(fBodyBodyAccJerkMagstd),
 meanfBodyBodyGyroMagstd=mean(fBodyBodyGyroMagstd),
 meanfBodyBodyGyroJerkMagstd=mean(fBodyBodyGyroJerkMagstd))
-write.table(Result,file="C:/Users/saif/Videos/Study/John Hopkins-Data Science/Course 3-Getting and Cleaning Data/Result.txt",row.name=FALSE)
+write.table(Result,file="./Result.txt",row.name=FALSE)
+
+#temp<-read.table("./Result.txt")
