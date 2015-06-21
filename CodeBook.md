@@ -21,4 +21,5 @@ The site where the data was obtained:
   * Make column Subject and Activity as factor
   * load dplyr package
   * group by subject and then by activity the Data_sub and store it in temp_data
-  * summarize temp_data with all the means of the 66 columns.  
+  * summarize temp_data with all the means of the 66 columns and store it in Result variable.
+  * Write it in a text file named Result.txt
